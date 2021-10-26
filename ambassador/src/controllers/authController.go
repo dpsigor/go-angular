@@ -137,3 +137,50 @@ func Logout(c *fiber.Ctx) error {
 		"message": "success",
 	})
 }
+
+func UpdateInfo(c *fiber.Ctx) error {
+	var data registerDTO
+
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	id, _ := middlewares.GetUserId(c)
+
+	user := models.User{
+		Id:        id,
+		FirstName: data.FirstName,
+		LastName:  data.LastName,
+		Email:     data.Email,
+	}
+
+	database.DB.Model(&user).Updates(&user) // O primeiro &user é para dizer qual tabela queremos atualizar. Poderia ser models.User{}
+
+	return c.JSON(user)
+}
+
+func UpdatePassword(c *fiber.Ctx) error {
+	var data registerDTO
+
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	if data.Password != data.PasswordConfirm {
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "passwords do not match",
+		})
+	}
+
+	id, _ := middlewares.GetUserId(c)
+
+	user := models.User{
+		Id: id,
+	}
+
+	user.SetPassword(data.Password)
+	database.DB.Model(&user).Updates(&user)
+
+	return c.JSON(user)
+}
