@@ -9,7 +9,6 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gofiber/fiber/v2"
-	"golang.org/x/crypto/bcrypt"
 )
 
 type registerDTO struct {
@@ -41,15 +40,13 @@ func Register(c *fiber.Ctx) error {
 		})
 	}
 
-	password, _ := bcrypt.GenerateFromPassword([]byte(data.Password), 12)
-
 	user := models.User{
 		FirstName:    data.FirstName,
 		LastName:     data.LastName,
 		Email:        data.Email,
-		Password:     password,
 		IsAmbassador: false,
 	}
+	user.SetPassword(data.Password)
 
 	database.DB.Create(&user)
 
@@ -79,8 +76,7 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
-	err := bcrypt.CompareHashAndPassword(user.Password, []byte(data.Password))
-	if err != nil {
+	if err := user.ComparePassword(data.Password); err != nil {
 		c.Status(fiber.StatusUnauthorized)
 		return c.JSON(fiber.Map{
 			"message": "Invalid credentials",
