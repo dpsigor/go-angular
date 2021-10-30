@@ -20,7 +20,7 @@ func Connect() {
 }
 
 func AutoMigrate() {
-	err := DB.AutoMigrate(models.User{}, models.Product{})
+	err := DB.AutoMigrate(models.User{}, models.Product{}, models.Link{})
 	if err != nil {
 		fmt.Println(err)
 	}

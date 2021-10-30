@@ -73,7 +73,7 @@ updateProduct() {
 
 
 deleteProduct() {
-  curl -v \
+  curl -s \
     -X "DELETE" \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
@@ -81,4 +81,13 @@ deleteProduct() {
 }
 
 
+getUserLinks() {
+  curl -s \
+    -H 'content-type: application/json' \
+    -H "cookie: $(cookies)" \
+    http://localhost:8000/api/admin/users/1/links
+}
 
+
+
+getUserLinks
