@@ -80,7 +80,7 @@ getUserLinks() {
   curl -s \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
-    http://localhost:8000/api/admin/users/1/links
+    http://localhost:8000/api/admin/users/7/links
 }
 
 getOrders() {
@@ -90,4 +90,4 @@ getOrders() {
     http://localhost:8000/api/admin/orders
 }
 
-getOrders
+getUserLinks
