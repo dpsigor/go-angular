@@ -2,6 +2,7 @@ package database
 
 import (
 	"ambassador/src/models"
+	"fmt"
 	"log"
 
 	"gorm.io/driver/mysql"
@@ -19,5 +20,8 @@ func Connect() {
 }
 
 func AutoMigrate() {
-	DB.AutoMigrate(models.User{})
+	err := DB.AutoMigrate(models.User{}, models.Product{})
+	if err != nil {
+		fmt.Println(err)
+	}
 }

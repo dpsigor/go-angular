@@ -37,4 +37,48 @@ getAmbassadors() {
     http://localhost:8000/api/admin/ambassadors
 }
 
-getAmbassadors
+getProducts() {
+  curl -s \
+    -H 'content-type: application/json' \
+    -H "cookie: $(cookies)" \
+    http://localhost:8000/api/admin/products
+}
+
+
+postProducts() {
+  curl -s \
+    -H 'content-type: application/json' \
+    -H "cookie: $(cookies)" \
+    -d '{ "title": "title", "description": "description", "image": "image", "price": 10 }' \
+    http://localhost:8000/api/admin/products
+}
+
+
+getProduct() {
+  curl -s \
+    -H 'content-type: application/json' \
+    -H "cookie: $(cookies)" \
+    http://localhost:8000/api/admin/products/1
+}
+
+
+updateProduct() {
+  curl -s \
+    -X "PUT" \
+    -H 'content-type: application/json' \
+    -H "cookie: $(cookies)" \
+    -d '{ "title": "title2", "description": "description", "image": "image", "price": 10 }' \
+    http://localhost:8000/api/admin/products/1
+}
+
+
+deleteProduct() {
+  curl -v \
+    -X "DELETE" \
+    -H 'content-type: application/json' \
+    -H "cookie: $(cookies)" \
+    http://localhost:8000/api/admin/products/2
+}
+
+
+
