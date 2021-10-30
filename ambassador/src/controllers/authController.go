@@ -148,11 +148,11 @@ func UpdateInfo(c *fiber.Ctx) error {
 	id, _ := middlewares.GetUserId(c)
 
 	user := models.User{
-		Id:        id,
 		FirstName: data.FirstName,
 		LastName:  data.LastName,
 		Email:     data.Email,
 	}
+	user.Id = id
 
 	database.DB.Model(&user).Updates(&user) // O primeiro &user é para dizer qual tabela queremos atualizar. Poderia ser models.User{}
 
@@ -175,9 +175,8 @@ func UpdatePassword(c *fiber.Ctx) error {
 
 	id, _ := middlewares.GetUserId(c)
 
-	user := models.User{
-		Id: id,
-	}
+	user := models.User{}
+	user.Id = id
 
 	user.SetPassword(data.Password)
 	database.DB.Model(&user).Updates(&user)

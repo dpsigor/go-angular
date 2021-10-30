@@ -60,9 +60,8 @@ func UpdateProduct(c *fiber.Ctx) error {
 		})
 	}
 
-	product := models.Product{
-		Id: uint(id),
-	}
+	product := models.Product{}
+	product.Id = uint(id)
 
 	if err := c.BodyParser(&product); err != nil {
 		return err
@@ -86,9 +85,8 @@ func DeleteProduct(c *fiber.Ctx) error {
 			"message": "failed to parse id",
 		})
 	}
-	product := models.Product{
-		Id: uint(id),
-	}
+	product := models.Product{}
+	product.Id = uint(id)
 	r := database.DB.Delete(&product)
 	fmt.Printf("r = %+v\n", r)
 	if r.RowsAffected == 0 {
