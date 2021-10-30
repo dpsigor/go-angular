@@ -44,7 +44,6 @@ getProducts() {
     http://localhost:8000/api/admin/products
 }
 
-
 postProducts() {
   curl -s \
     -H 'content-type: application/json' \
@@ -53,14 +52,12 @@ postProducts() {
     http://localhost:8000/api/admin/products
 }
 
-
 getProduct() {
   curl -s \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
     http://localhost:8000/api/admin/products/1
 }
-
 
 updateProduct() {
   curl -s \
@@ -71,7 +68,6 @@ updateProduct() {
     http://localhost:8000/api/admin/products/1
 }
 
-
 deleteProduct() {
   curl -s \
     -X "DELETE" \
@@ -80,7 +76,6 @@ deleteProduct() {
     http://localhost:8000/api/admin/products/2
 }
 
-
 getUserLinks() {
   curl -s \
     -H 'content-type: application/json' \
@@ -88,6 +83,11 @@ getUserLinks() {
     http://localhost:8000/api/admin/users/1/links
 }
 
+getOrders() {
+  curl -s \
+    -H 'content-type: application/json' \
+    -H "cookie: $(cookies)" \
+    http://localhost:8000/api/admin/orders
+}
 
-
-getUserLinks
+getOrders
