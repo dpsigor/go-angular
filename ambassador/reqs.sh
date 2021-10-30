@@ -24,8 +24,17 @@ updateUser() {
   curl -s \
     -X "PUT" \
     -H 'content-type: application/json' \
-    -H "cookie: \"$x\"" \
+    -H "cookie: $(cookies)" \
     -d '{"first_name":"b","last_name":"b","email":"b@b.com"}' \
     http://localhost:8000/api/admin/users/info
 }
 
+getAmbassadors() {
+  curl -s \
+    -X "GET" \
+    -H 'content-type: application/json' \
+    -H "cookie: $(cookies)" \
+    http://localhost:8000/api/admin/ambassadors
+}
+
+getAmbassadors
