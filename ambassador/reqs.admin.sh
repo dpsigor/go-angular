@@ -1,12 +1,12 @@
 register() {
   curl -s XPOST \
     -H 'content-type: application/json' \
-    -d '{"email":"b@b.com", "password":"a", "password_confirm":"a"}' \
-    http://localhost:8000/api/ambassador/register
+    -d '{"email":"admin@admin.com", "password":"a", "password_confirm":"a"}' \
+    http://localhost:8000/api/admin/register
 }
 
 login() {
-  curl -v -H 'content-type: application/json' -d '{"email":"b@b.com", "password":"a"}' http://localhost:8000/api/ambassador/login 2>&1
+  curl -v -H 'content-type: application/json' -d '{"email":"admin@admin.com", "password":"a"}' http://localhost:8000/api/admin/login 2>&1
 }
 
 cookies() {
@@ -17,7 +17,7 @@ getUser() {
   curl -s \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
-    http://localhost:8000/api/ambassador/user
+    http://localhost:8000/api/admin/user
 }
 
 updateUser() {
@@ -26,7 +26,7 @@ updateUser() {
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
     -d '{"first_name":"b","last_name":"b","email":"b@b.com"}' \
-    http://localhost:8000/api/ambassador/users/info
+    http://localhost:8000/api/admin/users/info
 }
 
 getAmbassadors() {
@@ -34,14 +34,14 @@ getAmbassadors() {
     -X "GET" \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
-    http://localhost:8000/api/ambassador/ambassadors
+    http://localhost:8000/api/admin/ambassadors
 }
 
 getProducts() {
   curl -s \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
-    http://localhost:8000/api/ambassador/products
+    http://localhost:8000/api/admin/products
 }
 
 postProducts() {
@@ -49,14 +49,14 @@ postProducts() {
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
     -d '{ "title": "title", "description": "description", "image": "image", "price": 10 }' \
-    http://localhost:8000/api/ambassador/products
+    http://localhost:8000/api/admin/products
 }
 
 getProduct() {
   curl -s \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
-    http://localhost:8000/api/ambassador/products/1
+    http://localhost:8000/api/admin/products/1
 }
 
 updateProduct() {
@@ -65,7 +65,7 @@ updateProduct() {
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
     -d '{ "title": "title2", "description": "description", "image": "image", "price": 10 }' \
-    http://localhost:8000/api/ambassador/products/1
+    http://localhost:8000/api/admin/products/1
 }
 
 deleteProduct() {
@@ -73,22 +73,20 @@ deleteProduct() {
     -X "DELETE" \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
-    http://localhost:8000/api/ambassador/products/2
+    http://localhost:8000/api/admin/products/2
 }
 
 getUserLinks() {
   curl -s \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
-    http://localhost:8000/api/ambassador/users/7/links
+    http://localhost:8000/api/admin/users/7/links
 }
 
 getOrders() {
   curl -s \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
-    http://localhost:8000/api/ambassador/orders
+    http://localhost:8000/api/admin/orders
 }
-
-
 
