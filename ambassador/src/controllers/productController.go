@@ -28,9 +28,8 @@ func CreateProducts(c *fiber.Ctx) error {
 	if err := c.BodyParser(&product); err != nil {
 		return err
 	}
-
 	database.DB.Create(&product)
-
+	go database.ClearCache("products_frontend", "products_backend")
 	return c.JSON(product)
 }
 
@@ -64,21 +63,18 @@ func UpdateProduct(c *fiber.Ctx) error {
 			"message": "failed to parse id",
 		})
 	}
-
 	product := models.Product{}
 	product.Id = uint(id)
-
 	if err := c.BodyParser(&product); err != nil {
 		return err
 	}
-
 	r := database.DB.Model(&product).Updates(&product)
-
 	if r.RowsAffected == 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "product not found or without changes",
 		})
 	}
+	go database.ClearCache("products_frontend", "products_backend")
 	return c.JSON(product)
 }
 
@@ -92,7 +88,7 @@ func DeleteProduct(c *fiber.Ctx) error {
 	product := models.Product{}
 	product.Id = uint(id)
 	r := database.DB.Delete(&product)
-	fmt.Printf("r = %+v\n", r)
+	go database.ClearCache("products_frontend", "products_backend")
 	if r.RowsAffected == 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "product not found",

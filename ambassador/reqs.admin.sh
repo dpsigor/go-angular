@@ -56,16 +56,17 @@ getProduct() {
   curl -s \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
-    http://localhost:8000/api/admin/products/1
+    http://localhost:8000/api/admin/products/3
 }
 
 updateProduct() {
+  [[ -z $1 ]] && echo "passar title" && return 1
   curl -s \
     -X "PUT" \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
-    -d '{ "title": "title2", "description": "description", "image": "image", "price": 10 }' \
-    http://localhost:8000/api/admin/products/1
+    -d '{ "title": "'"$1"'", "description": "description", "image": "image", "price": 10 }' \
+    http://localhost:8000/api/admin/products/3
 }
 
 deleteProduct() {
@@ -90,3 +91,8 @@ getOrders() {
     http://localhost:8000/api/admin/orders
 }
 
+getProduct
+echo ""
+updateProduct opaopa
+echo ""
+getProduct
