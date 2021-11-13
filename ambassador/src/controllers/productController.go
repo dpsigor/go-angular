@@ -6,7 +6,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"sort"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -119,4 +121,67 @@ func ProductsFrontend(c *fiber.Ctx) error {
 		}
 	}
 	return c.JSON(products)
+}
+
+func ProductsBackend(c *fiber.Ctx) error {
+	var products []models.Product
+	var ctx = context.Background()
+	result, err := database.Cache.Get(ctx, "products_backend").Result()
+	if err != nil {
+		database.DB.Find(&products)
+		bytes, err := json.Marshal(products)
+		if err != nil {
+			panic(err)
+		}
+		database.Cache.Set(ctx, "products_backend", bytes, 30*time.Minute)
+	} else {
+		json.Unmarshal([]byte(result), &products)
+	}
+	var searchedProducts []models.Product
+	if s := c.Query("s"); s != "" {
+		lower := strings.ToLower(s)
+		for _, product := range products {
+			if strings.Contains(strings.ToLower(product.Title), lower) || strings.Contains(strings.ToLower(product.Description), lower) {
+				searchedProducts = append(searchedProducts, product)
+			}
+		}
+	} else {
+		searchedProducts = products
+	}
+	if sortParam := c.Query("sort"); sortParam != "" {
+		sortLower := strings.ToLower(sortParam)
+		if sortLower == "asc" {
+			sort.Slice(searchedProducts, func(i, j int) bool { return searchedProducts[i].Price < searchedProducts[j].Price })
+		} else if sortLower == "desc" {
+			sort.Slice(searchedProducts, func(i, j int) bool { return searchedProducts[i].Price > searchedProducts[j].Price })
+		}
+	}
+	total := len(searchedProducts)
+	perPage := 9
+	lastPage := total/perPage + 1
+	page := 1
+	start := 0
+	end := perPage
+	if pageQ, err := strconv.Atoi(c.Query("page", "1")); err == nil {
+		if pageQ > 0 {
+			page = pageQ
+			if total <= page*perPage && total >= (page-1)*perPage {
+				page = lastPage
+				start = (page - 1) * perPage
+				end = total
+			} else if total >= page*perPage {
+				start = (page - 1) * perPage
+				end = page * perPage
+			} else {
+				end = 0
+			}
+		}
+	}
+	return c.JSON(fiber.Map{
+		"data":      searchedProducts[start:end],
+		"total":     total,
+		"page":      page,
+		"last_page": lastPage,
+		"results":   end - start,
+	})
 }
