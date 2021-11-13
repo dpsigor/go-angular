@@ -90,7 +90,26 @@ getOrders() {
     http://localhost:8000/api/ambassador/orders
 }
 
+postLinks() {
+  curl -s -XPOST \
+    -H 'content-type: application/json' \
+    -H "cookie: $(cookies)" \
+    -d '{"products":[2,4,5]}' \
+    http://localhost:8000/api/ambassador/links
+}
 
-getUser
+getStats() {
+  curl -s \
+    -H 'content-type: application/json' \
+    -H "cookie: $(cookies)" \
+    http://localhost:8000/api/ambassador/stats
+}
 
+getRankings() {
+  curl -s \
+    -H 'content-type: application/json' \
+    -H "cookie: $(cookies)" \
+    http://localhost:8000/api/ambassador/rankings
+}
 
+getRankings
