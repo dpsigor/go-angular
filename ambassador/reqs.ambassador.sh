@@ -53,10 +53,11 @@ postProducts() {
 }
 
 getProduct() {
+  id=$1
   curl -s \
     -H 'content-type: application/json' \
     -H "cookie: $(cookies)" \
-    http://localhost:8000/api/ambassador/products/1
+    http://localhost:8000/api/ambassador/products/"$id"
 }
 
 updateProduct() {
@@ -112,4 +113,20 @@ getRankings() {
     http://localhost:8000/api/ambassador/rankings
 }
 
-getRankings
+# Obtenha o code utilizando getStats
+getCheckoutLink() {
+  code=$1
+  curl -s \
+    -H 'content-type: application/json' \
+    http://localhost:8000/api/checkout/links/"$code"
+}
+
+createOrder() {
+  json=$1
+  curl -s -XPOST \
+    -H 'content-type: application/json' \
+    -d "$json" \
+    http://localhost:8000/api/checkout/orders
+}
+
+# createOrder '{"first_name":"a","last_name":"a","email":"a@a.com","address":"a","country":"a","city":"a","zip":"a","code":"WhaUtMx","products":[{"product_id":7,"quantity":5},{"product_id":8,"quantity":2}]}'
