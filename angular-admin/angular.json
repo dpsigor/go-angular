@@ -14,9 +14,6 @@
         },
         "@schematics/angular:service": {
           "skipTests": true
-        },
-        "@schematics/angular:module": {
-          "skipTests": true
         }
       },
       "root": "",
