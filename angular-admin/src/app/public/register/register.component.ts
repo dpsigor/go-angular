@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -14,8 +13,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient,
     private router: Router,
+    private authService: AuthService,
   ) {
     this.myForm = this.formBuilder.group({
       first_name: '',
@@ -30,7 +29,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submit(): void {
-    this.http.post(`${environment.api}/register`, this.myForm.getRawValue()).subscribe(
+    this.authService.register(this.myForm.getRawValue()).subscribe(
       () => this.router.navigate(['/login']),
     );
   }
