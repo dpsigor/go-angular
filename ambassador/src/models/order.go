@@ -2,7 +2,7 @@ package models
 
 type Order struct {
 	Model           `json:"model"`
-	TransationId    string      `json:"transation_id" gorm:"null"`
+	TransactionId   string      `json:"transaction_id" gorm:"null"`
 	UserId          uint        `json:"user_id"`
 	Code            string      `json:"code"`
 	AmbassadorEmail string      `json:"ambassador_email"`

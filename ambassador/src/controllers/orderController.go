@@ -3,6 +3,7 @@ package controllers
 import (
 	"ambassador/src/database"
 	"ambassador/src/models"
+	"context"
 	"encoding/json"
 	"os"
 
@@ -133,7 +134,7 @@ func CreateOrder(c *fiber.Ctx) error {
 		})
 	}
 
-	order.TransationId = source.ID
+	order.TransactionId = source.ID
 
 	if err := tx.Save(&order).Error; err != nil {
 		tx.Rollback()
@@ -151,4 +152,55 @@ func CreateOrder(c *fiber.Ctx) error {
 	}
 	return c.Send(x)
 	// return c.JSON(source) // bugou...???
+}
+
+func CompleteOrder(c *fiber.Ctx) error {
+	var data map[string]string
+
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	order := models.Order{}
+	database.DB.Preload("OrderItems").First(&order, models.Order{
+		TransactionId: data["source"],
+	})
+
+	if order.Complete {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"message": "already completed",
+		})
+	}
+
+	if order.Id == 0 {
+		c.Status(fiber.StatusNotFound) // TODO: 404 mesmo?...
+		return c.JSON(fiber.Map{
+			"message": "Order not found",
+		})
+	}
+
+	order.Complete = true
+	database.DB.Save(&order)
+
+	go func(ord models.Order) {
+		ambassadorRevenue := 0.0
+		adminRevenue := 0.0
+
+		for _, item := range order.OrderItems {
+			ambassadorRevenue += item.AmbassadorRevenue
+			adminRevenue += item.AdminRevenue
+		}
+
+		user := models.User{}
+		user.Id = order.UserId
+
+		database.DB.First(&user)
+
+		database.Cache.ZIncrBy(context.Background(), "rankings", ambassadorRevenue, user.Name())
+	}(order)
+
+	return c.JSON(fiber.Map{
+		"message": "sucess",
+	})
 }
