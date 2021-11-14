@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -29,9 +30,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submit(): void {
-    console.log();
-    this.http.post('http://localhost:8000/api/admin/register', this.myForm.getRawValue())
-    .subscribe(
+    this.http.post(`${environment.api}/register`, this.myForm.getRawValue()).subscribe(
       () => this.router.navigate(['/login']),
     );
   }
