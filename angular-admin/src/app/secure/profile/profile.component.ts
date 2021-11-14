@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { Emitters } from 'src/app/emitters/emitters';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,9 +9,10 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnDestroy {
   infoForm: FormGroup;
   passwordForm: FormGroup;
+  authSubs: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,26 +27,23 @@ export class ProfileComponent implements OnInit {
       password: '',
       password_confirm: '',
     });
-  }
-
-  ngOnInit(): void {
-    this.authService.user().subscribe(
-      user => {
-        this.infoForm.patchValue(user);
-      },
-    )
+    this.authSubs = Emitters.authEmitter.subscribe(user => {
+      if (user) this.infoForm.patchValue(user);
+    });
   }
 
   infoSubmit(): void {
-    this.authService.updateInfo(this.infoForm.getRawValue()).subscribe(
-      res => console.log(res),
-    )
+    this.authService.updateInfo(this.infoForm.getRawValue()).subscribe(user => Emitters.authEmitter.emit(user));
   }
 
   passwordSubmit(): void {
     this.authService.updatePassword(this.passwordForm.getRawValue()).subscribe(
       res => console.log(res),
     )
+  }
+
+  ngOnDestroy(): void {
+    this.authSubs.unsubscribe();
   }
 
 }
