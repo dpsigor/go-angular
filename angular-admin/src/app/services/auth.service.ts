@@ -18,15 +18,15 @@ export class AuthService {
   }
 
   login(data: any): Observable<any> {
-    return this.http.post(`${environment.api}/login`, data, { withCredentials: true });
+    return this.http.post(`${environment.api}/login`, data);
   }
 
   user(): Observable<User> {
-    return this.http.get<User>(`${environment.api}/user`, { withCredentials: true });
+    return this.http.get<User>(`${environment.api}/user`);
   }
 
   logout(): Observable<any> {
-    return this.http.post(`${environment.api}/logout`, {}, { withCredentials: true });
+    return this.http.post(`${environment.api}/logout`, {});
   }
 
 }
