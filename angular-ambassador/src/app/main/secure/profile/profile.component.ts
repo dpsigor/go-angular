@@ -12,7 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 export class ProfileComponent implements OnDestroy {
   infoForm: FormGroup;
   passwordForm: FormGroup;
-  authSubs: Subscription;
+  subs: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,13 +27,16 @@ export class ProfileComponent implements OnDestroy {
       password: '',
       password_confirm: '',
     });
-    this.authSubs = Emitters.authEmitter.subscribe(user => {
-      if (user) this.infoForm.patchValue(user);
-    });
+    if (Emitters.user) this.infoForm.patchValue(Emitters.user);
+    this.subs = Emitters.authEmitter.subscribe(
+      user => {
+        if (user) this.infoForm.patchValue(user);
+      },
+    )
   }
 
   infoSubmit(): void {
-    this.authService.updateInfo(this.infoForm.getRawValue()).subscribe(user => Emitters.authEmitter.emit(user));
+    this.authService.updateInfo(this.infoForm.getRawValue()).subscribe(user => Emitters.user = user);
   }
 
   passwordSubmit(): void {
@@ -43,7 +46,7 @@ export class ProfileComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authSubs.unsubscribe();
+    this.subs.unsubscribe();
   }
 
 }

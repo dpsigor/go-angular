@@ -20,9 +20,8 @@ export class NavComponent implements OnInit {
   }
 
   logout(): void {
-    console.log('alou');
     this.authService.logout().subscribe(
-      () => Emitters.authEmitter.emit(null),
+      () => Emitters.user = null,
     )
   }
 
