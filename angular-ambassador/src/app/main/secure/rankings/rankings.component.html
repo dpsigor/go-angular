@@ -1,0 +1,18 @@
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Revenue</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rank of rankings | keyvalue; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ rank.key }}</td>
+        <td>{{ rank.value }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
