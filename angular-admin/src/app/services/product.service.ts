@@ -16,4 +16,9 @@ export class ProductService {
     return this.http.get<Product[]>(this.endpoint);
   }
 
+  create(data: any): Observable<Product> {
+    data.price = parseFloat(data.price);
+    return this.http.post<Product>(this.endpoint, data);
+  }
+
 }

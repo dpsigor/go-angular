@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { SecureComponent } from './secure.component';
 import { NavComponent } from './nav/nav.component';
 import { MenuComponent } from './menu/menu.component';
@@ -12,6 +14,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
 import { LinksComponent } from './links/links.component';
 import { ProductsComponent } from './products/products.component';
+import { ProductsFormComponent } from './products/products-form/products-form.component';
 
 
 
@@ -24,6 +27,7 @@ import { ProductsComponent } from './products/products.component';
     UsersComponent,
     LinksComponent,
     ProductsComponent,
+    ProductsFormComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +37,8 @@ import { ProductsComponent } from './products/products.component';
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
   ]
 })
 export class SecureModule { }
