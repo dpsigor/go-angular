@@ -1,5 +1,9 @@
+html, body { height: 100%; }
+
 body {
   font-size: .875rem;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .feather {
