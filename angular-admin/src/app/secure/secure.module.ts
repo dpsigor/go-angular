@@ -7,6 +7,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { SecureComponent } from './secure.component';
 import { NavComponent } from './nav/nav.component';
 import { MenuComponent } from './menu/menu.component';
@@ -39,6 +40,7 @@ import { ProductsFormComponent } from './products/products-form/products-form.co
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonToggleModule,
   ]
 })
 export class SecureModule { }

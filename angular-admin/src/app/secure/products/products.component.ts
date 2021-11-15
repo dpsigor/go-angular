@@ -26,4 +26,13 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  delete(id: number): void {
+    if (confirm('Are you sure?')) {
+      this.productService.delete(id).subscribe(
+        () => this.dataSource.data = this.dataSource.data.filter((p: Product) => p.id !== id),
+        err => alert(err.error.message),
+      );
+    }
+  }
+
 }
