@@ -14,4 +14,8 @@ export class OrderService {
     return this.http.post(`${environment.api}/orders`, data);
   }
 
+  confirm(data: any): Observable<any> {
+    return this.http.post(`${environment.api}/orders/confirm`, data);
+  }
+
 }

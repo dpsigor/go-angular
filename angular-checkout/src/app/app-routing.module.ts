@@ -5,7 +5,7 @@ import { FormComponent } from './form/form.component';
 import { SuccessComponent } from './success/success.component';
 
 const routes: Routes = [
-  { path: 'success', component: SuccessComponent },
+  { path: 'sucess', component: SuccessComponent },
   { path: 'error', component: ErrorComponent },
   { path: ':code', component: FormComponent },
 ];

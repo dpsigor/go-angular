@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { Product } from '../interfaces/product';
 import { User } from '../interfaces/user';
 import { LinkService } from '../services/link.service';
 import { OrderService } from '../services/order.service';
+
+declare var Stripe: any;
 
 @Component({
   selector: 'app-form',
@@ -17,6 +20,7 @@ export class FormComponent implements OnInit {
   products: Product[] = [];
   quantities: number[] = [];
   form: FormGroup;
+  stripe: any;
 
   constructor(
     private linkService: LinkService,
@@ -36,6 +40,7 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.stripe = Stripe(environment.stripe_key);
     this.code = this.route.snapshot.params['code'];
     this.linkService.get(this.code).subscribe(
       r => {
@@ -61,7 +66,10 @@ export class FormComponent implements OnInit {
     };
     this.orderService.create(data).subscribe(
       r => {
-        console.log(r);
+        console.log(this.stripe);
+        this.stripe.redirectToCheckout({
+          sessionId: r.id,
+        })
       },
     )
   }

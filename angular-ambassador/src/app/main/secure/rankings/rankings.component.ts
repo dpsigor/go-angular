@@ -7,13 +7,17 @@ import { StatsService } from 'src/app/services/stats.service';
   styleUrls: ['./rankings.component.css']
 })
 export class RankingsComponent implements OnInit {
-  rankings: any[] = [];
+  rankings: { [key: string]: number } = {};
 
   constructor(private statsService: StatsService) { }
 
   ngOnInit(): void {
     this.statsService.rankings().subscribe(
-      rankings => this.rankings = rankings,
+      rankings => {
+        for (const rank of rankings) {
+          this.rankings[Object.keys(rank)[0]] = Number(Object.values(rank)[0]);
+        }
+      }
     );
   }
 
