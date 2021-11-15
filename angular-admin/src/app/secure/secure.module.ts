@@ -3,12 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
 import { SecureComponent } from './secure.component';
 import { NavComponent } from './nav/nav.component';
 import { MenuComponent } from './menu/menu.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { LinksComponent } from './links/links.component';
+import { ProductsComponent } from './products/products.component';
 
 
 
@@ -19,6 +22,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MenuComponent,
     ProfileComponent,
     UsersComponent,
+    LinksComponent,
+    ProductsComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +32,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
+    MatButtonModule,
   ]
 })
 export class SecureModule { }
