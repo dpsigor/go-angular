@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
+import { SecureModule } from './secure/secure.module';
 import { MainComponent } from './main.component';
 import { NavComponent } from './nav/nav.component';
+import { FrontendProductsComponent } from './frontend-products/frontend-products.component';
 
 
 
@@ -10,10 +11,11 @@ import { NavComponent } from './nav/nav.component';
   declarations: [
     MainComponent,
     NavComponent,
+    FrontendProductsComponent,
   ],
   imports: [
-    CommonModule,
-    RouterModule,
+    SharedModule,
+    SecureModule,
   ]
 })
 export class MainModule { }
