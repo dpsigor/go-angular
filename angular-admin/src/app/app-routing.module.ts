@@ -4,6 +4,7 @@ import { LoginComponent } from './public/login/login.component';
 import { PublicComponent } from './public/public.component';
 import { RegisterComponent } from './public/register/register.component';
 import { LinksComponent } from './secure/links/links.component';
+import { OrdersComponent } from './secure/orders/orders.component';
 import { ProductsFormComponent } from './secure/products/products-form/products-form.component';
 import { ProductsComponent } from './secure/products/products.component';
 import { ProfileComponent } from './secure/profile/profile.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'products', component: ProductsComponent },
       { path: 'products/create', component: ProductsFormComponent, data: { create: true } },
       { path: 'products/:id/edit', component: ProductsFormComponent, data: { create: false } },
+      { path: 'orders', component: OrdersComponent },
     ],
   },
   {
