@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.post(`${environment.api}/logout`, {});
+    return this.http.get(`${environment.api}/logout`);
   }
 
   updateInfo(data: any): Observable<User> {

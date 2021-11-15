@@ -1,0 +1,36 @@
+<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom shadow-sm">
+  <p class="h5 my-0 me-md-auto fw-normal">
+    <a href="javascript:void(0)" class="p-1 text-decation-none">
+      Frontend
+    </a>
+    <a href="javascript:void(0)" class="p-1 text-decation-none">
+      Backend
+    </a>
+  </p>
+
+  <nav class="my-2 my-md-0 me-md-3" *ngIf="user">
+    <a
+      class="p-2 text-dark text-decoration-none"
+      href="#"
+      (click)="logout()"
+    >Logout</a>
+  </nav>
+
+  <ng-container *ngIf="!user">
+    <a
+      class="btn btn-outline-primary"
+      routerLink="/login"
+    >Login</a>
+    <a
+      class="btn btn-outline-primary"
+      routerLink="/register"
+    >Sign up</a>
+  </ng-container>
+  
+  <a
+    class="btn btn-outline-primary"
+    *ngIf="user"
+    routerLink="/profile"
+  >{{ user.first_name }} {{ user.last_name }}</a>
+
+</header>
