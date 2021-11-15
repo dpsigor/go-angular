@@ -25,4 +25,9 @@ export class ProductService {
     return this.http.get<PaginatedProducts>(`${this.endpoint}/backend`, { params });
   }
 
+  frontend(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.endpoint}/frontend`);
+  }
+
+
 }

@@ -1,3 +1,7 @@
+.card {
+  cursor: pointer;
+}
+
 .selected {
-  outline: solid 2px blue;
+  outline: solid 4px darkcyan;
 }
