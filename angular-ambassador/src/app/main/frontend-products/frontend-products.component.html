@@ -30,7 +30,7 @@
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
   <div
     class="col"
-    *ngFor="let product of products"
+    *ngFor="let product of products | filter:s | paginate:page:9 | sort:sort"
   >
     <div class="card shadow-sm" (click)="select(product.id)" [class.selected]="isSelected(product.id)">
       <img [src]="product.image" height="200"/>

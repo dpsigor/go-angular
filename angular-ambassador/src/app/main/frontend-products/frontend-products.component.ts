@@ -56,7 +56,7 @@ export class FrontendProductsComponent implements OnInit {
   }
 
   onSort(sort: string): void {
-    if (!['asc', 'desc'].includes(sort)) return;
+    if (!['asc', 'desc', ''].includes(sort)) return;
     this.router.navigate([], {
       queryParams: {
         sort,

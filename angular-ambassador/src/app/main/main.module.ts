@@ -6,6 +6,9 @@ import { NavComponent } from './nav/nav.component';
 import { FrontendProductsComponent } from './frontend-products/frontend-products.component';
 import { HeaderComponent } from './header/header.component';
 import { BackendProductsComponent } from './backend-products/backend-products.component';
+import { PaginatePipe } from './pipes/paginate.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
+import { SortPipe } from './pipes/sort.pipe';
 
 
 
@@ -16,6 +19,9 @@ import { BackendProductsComponent } from './backend-products/backend-products.co
     FrontendProductsComponent,
     HeaderComponent,
     BackendProductsComponent,
+    PaginatePipe,
+    FilterPipe,
+    SortPipe,
   ],
   imports: [
     SharedModule,
