@@ -139,7 +139,7 @@ confirmOrder() {
 
 # postLinks
 # createOrder '{"first_name":"a","last_name":"a","email":"a@a.com","address":"a","country":"a","city":"a","zip":"a","code":"oesXpTq","products":[{"product_id":7,"quantity":5},{"product_id":8,"quantity":2}]}'
-# getRankings
+getRankings
 # confirmOrder cs_test_b1nWqaK6N1DEmeFwW4RlHTakyXcRePqReYcXpF1vlmUQLQBXqYhZ6g4yjp
 
 # [{"Sarina Donnelly":219.6},{"Modesta Labadie":204.00000000000003},{"amb amb":148.10000000000002},{"Idell Shields":144.9},{"Vladimir Pfannerstill":136.5},{"Vella Hirthe":109.4},{"Eugene Wehner":106.60000000000001},{"Brendon Homenick":100.39999999999999},{"Camden Rogahn":62.2},{"Immanuel Windler":62},{"Wilhelmine Hills":59.7},{"Winnifred Schmeler":49.900000000000006},{"Jaden Runte":44.400000000000006},{"Jeffrey Weimann":41.1},{"Evangeline Reichel":39.3},{"Fatima Hilll":23.900000000000002},{"Wilhelmine Metz":0},{"Taurean Prohaska":0},{"Stephany Schumm":0},{"Myrtle Powlowski":0},{"Michale Ruecker":0},{"Luther Sanford":0},{"Lila Ryan":0},{"Lavon Ebert":0},{"Kiarra McGlynn":0},{"Kelli Leffler":0},{"Frederick Kohler":0},{"Ernesto Gutkowski":0},{"Daphney Rowe":0},{"Dallas Tillman":0},{"Casandra Lang":0}]

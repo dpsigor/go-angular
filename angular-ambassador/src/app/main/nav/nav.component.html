@@ -1,9 +1,18 @@
 <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom shadow-sm">
   <p class="h5 my-0 me-md-auto fw-normal">
-    <a href="javascript:void(0)" class="p-1 text-decation-none">
+    <a
+      routerLink="/"
+      routerLinkActive="text-decoration-underline"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="p-1 text-decation-none"
+    >
       Frontend
     </a>
-    <a href="javascript:void(0)" class="p-1 text-decation-none">
+    <a
+      routerLink="/backend"
+      routerLinkActive="text-decoration-underline"
+      class="p-1 text-decation-none"
+    >
       Backend
     </a>
   </p>

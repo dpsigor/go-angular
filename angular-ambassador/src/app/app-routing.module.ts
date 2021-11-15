@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BackendProductsComponent } from './main/backend-products/backend-products.component';
 import { FrontendProductsComponent } from './main/frontend-products/frontend-products.component';
 import { MainComponent } from './main/main.component';
 import { ProfileComponent } from './main/secure/profile/profile.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       { path: '', component: FrontendProductsComponent },
+      { path: 'backend', component: BackendProductsComponent },
       {
         path: '',
         component: SecureComponent,

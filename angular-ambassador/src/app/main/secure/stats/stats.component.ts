@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StatsService } from 'src/app/services/stats.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-stats',
@@ -15,6 +16,10 @@ export class StatsComponent implements OnInit {
     this.statsService.stats().subscribe(
       stats => this.links = stats,
     );
+  }
+
+  checkoutLink(code: string): string {
+    return `${environment.checkout_url}/${code}`;
   }
 
 }
